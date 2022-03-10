@@ -1,0 +1,470 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetRelevantFinancialData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_DataList" Type="OutArgument(scg:List(sd:DataTable))" />
+    <x:Property Name="out_YearList" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="out_CompanyName" Type="OutArgument(x:String)" />
+    <x:Property Name="out_CompanyTicker" Type="OutArgument(x:String)" />
+    <x:Property Name="io_BrowserElement" Type="InOutArgument(ui:UiElement)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>884,3220.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GetRelevantFinancialData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="40">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.Excel.Activities.Business.Filter</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="66">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GetRelevantFinancialData" sap:VirtualizedContainerService.HintSize="894,3156" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Start" sap:VirtualizedContainerService.HintSize="852,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;GetRelevantFinancialData Start&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Alphabet Income Statement 2005-2020 | GOOG | MacroTrends" sap:VirtualizedContainerService.HintSize="852,2794.66666666667" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[io_BrowserElement]" InteractionMode="DebuggerApi" OpenMode="Never" OutUiElement="[io_BrowserElement]" ScopeGuid="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="818,2656.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="Year1" />
+              <Variable x:TypeArguments="x:String" Name="Year2" />
+              <Variable x:TypeArguments="x:String" Name="Year3" />
+              <Variable x:TypeArguments="x:String" Name="Year4" />
+              <Variable x:TypeArguments="x:String" Name="CompanyHeader" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'ViewAnnualReports'" sap:VirtualizedContainerService.HintSize="776,554" sap2010:WorkflowViewState.IdRef="NCheckState_4" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+              <uix:NCheckState.IfExists>
+                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="376,334" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NMouseScroll Direction="Down" DisplayName="Mouse Scroll" sap:VirtualizedContainerService.HintSize="334,239.333333333333" sap2010:WorkflowViewState.IdRef="NMouseScroll_1" InteractionMode="HardwareEvents" MovementUnits="10" Version="V1">
+                    <uix:NMouseScroll.SearchedElement>
+                      <uix:SearchedElement DisplayName="{x:Null}">
+                        <uix:SearchedElement.Target>
+                          <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/DUNE/dune-acquisition/financial-statements" ContentHash="3l5Ip_NmckC0J-EE4AsqKw" DesignTimeRectangle="1246, 858, 179, 20" FriendlyName="'ViewAnnualReports'" FullSelectorArgument="&lt;webctrl tag='STRONG' aaname='View Annual Reports' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='STRONG' type='' aaname='View Annual Reports' check:text='View Annual Reports' /&gt;" Guid="e10955ec-37c1-48b3-9b14-d473610cd78f" ImageBase64="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" InformativeScreenshot="7c6237ebcd931004045a9bc58f528278.png" Reference="3Eudy47NIky5BCA2zpyP5A/I6xgz2U01Eq722_aJWG9Sw" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Dune Acquisition Financial Statements 2020-2020 | DUNE | MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                        </uix:SearchedElement.Target>
+                        <uix:SearchedElement.Timeout>
+                          <InArgument x:TypeArguments="x:Double" />
+                        </uix:SearchedElement.Timeout>
+                      </uix:SearchedElement>
+                    </uix:NMouseScroll.SearchedElement>
+                  </uix:NMouseScroll>
+                </Sequence>
+              </uix:NCheckState.IfExists>
+              <uix:NCheckState.Target>
+                <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/DUNE/dune-acquisition/financial-statements" ContentHash="3l5Ip_NmckC0J-EE4AsqKw" DesignTimeRectangle="1246, 858, 179, 20" FriendlyName="'ViewAnnualReports'" FullSelectorArgument="&lt;webctrl tag='STRONG' aaname='View Annual Reports' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='STRONG' type='' aaname='View Annual Reports' check:text='View Annual Reports' /&gt;" Guid="e10955ec-37c1-48b3-9b14-d473610cd78f" ImageBase64="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" InformativeScreenshot="7c6237ebcd931004045a9bc58f528278.png" Reference="3Eudy47NIky5BCA2zpyP5A/I6xgz2U01Eq722_aJWG9Sw" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Dune Acquisition Financial Statements 2020-2020 | DUNE | MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector" />
+              </uix:NCheckState.Target>
+            </uix:NCheckState>
+            <uix:NGetText DisplayName="Get Text 'Ford Motor'" sap:VirtualizedContainerService.HintSize="776,158" sap2010:WorkflowViewState.IdRef="NGetText_5" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+              <uix:NGetText.Target>
+                <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" DesignTimeRectangle="86, -66, 1875, 492" FriendlyName="'Ford Motor'" FullSelectorArgument="&lt;webctrl tag='H2' aaname='*Income Statement*|*' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='H2' type='' /&gt;" Guid="ad9c4a16-304e-46ff-9e21-23d3e7630455" ImageBase64="" InformativeScreenshot="ddd06e9fa74cc9be9ffdaad225a0a63d.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement*|*| MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector" />
+              </uix:NGetText.Target>
+              <uix:NGetText.Text>
+                <OutArgument x:TypeArguments="x:String">[CompanyHeader]</OutArgument>
+              </uix:NGetText.Text>
+            </uix:NGetText>
+            <Assign DisplayName="Assign Company Name" sap:VirtualizedContainerService.HintSize="776,62" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_CompanyName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Split(CompanyHeader, "Income Statement")(0).Trim]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign DisplayName="Assign Company Ticker" sap:VirtualizedContainerService.HintSize="776,62" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[out_CompanyTicker]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[CompanyHeader.Split("|"c)(1).Trim]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Sequence DisplayName="Get Year Headers" sap:VirtualizedContainerService.HintSize="776,1340" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <uix:NGetText DisplayName="Get Text 'Year1'" sap:VirtualizedContainerService.HintSize="734,158" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NGetText.Target>
+                  <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" DesignTimeRectangle="666, 571, 100, 22" ElementType="Text" FriendlyName="'2020-12-31'" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='3' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="3a2d5733901df0a75abeef5cf818b4fb.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NGetText.Target>
+                <uix:NGetText.Text>
+                  <OutArgument x:TypeArguments="x:String">[Year1]</OutArgument>
+                </uix:NGetText.Text>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NGetText>
+              <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'Year2'" sap:VirtualizedContainerService.HintSize="734,22" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NCheckState.IfExists>
+                  <Sequence DisplayName="Second year appears" sap:VirtualizedContainerService.HintSize="376,252.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NGetText DisplayName="Get Text 'Year2'" sap:VirtualizedContainerService.HintSize="334,158" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                      <uix:NGetText.Target>
+                        <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" ContentHash="hlv6Tm0gGkq-zGAj4vCxoQ" DesignTimeRectangle="816, 571, 100, 22" ElementType="Text" FriendlyName="'Year2'" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='4' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="75ffa6afdd568f164bc0fcb65d1b41f1.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/oKopk5SPIECDOKUYUHXCSQ" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                      </uix:NGetText.Target>
+                      <uix:NGetText.Text>
+                        <OutArgument x:TypeArguments="x:String">[Year2]</OutArgument>
+                      </uix:NGetText.Text>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NGetText>
+                  </Sequence>
+                </uix:NCheckState.IfExists>
+                <uix:NCheckState.IfNotExists>
+                  <Sequence DisplayName="Second year does not appear" sap:VirtualizedContainerService.HintSize="304,156.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="Assign Year2 to Empty" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Year2]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </uix:NCheckState.IfNotExists>
+                <uix:NCheckState.Target>
+                  <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" ContentHash="hlv6Tm0gGkq-zGAj4vCxoQ" DesignTimeRectangle="816, 571, 100, 22" ElementType="Text" FriendlyName="'Year2'" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='4' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="75ffa6afdd568f164bc0fcb65d1b41f1.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/oKopk5SPIECDOKUYUHXCSQ" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NCheckState.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NCheckState>
+              <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'Year3'" sap:VirtualizedContainerService.HintSize="734,472.666666666667" sap2010:WorkflowViewState.IdRef="NCheckState_2" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NCheckState.IfExists>
+                  <Sequence DisplayName="Third year appears" sap:VirtualizedContainerService.HintSize="376,252.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NGetText DisplayName="Get Text 'Year3'" sap:VirtualizedContainerService.HintSize="334,158" sap2010:WorkflowViewState.IdRef="NGetText_3" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                      <uix:NGetText.Target>
+                        <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" ContentHash="J4aOJlqKW0uL651itw3COw" DesignTimeRectangle="966, 571, 100, 22" ElementType="Text" FriendlyName="'Year3'" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='5' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="e00a2b70f7d0d773f277bb2e6f2a9c6d.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/Tgpuzgposk6VDfudAMeN2Q" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                      </uix:NGetText.Target>
+                      <uix:NGetText.Text>
+                        <OutArgument x:TypeArguments="x:String">[Year3]</OutArgument>
+                      </uix:NGetText.Text>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NGetText>
+                  </Sequence>
+                </uix:NCheckState.IfExists>
+                <uix:NCheckState.IfNotExists>
+                  <Sequence DisplayName="Third year does not appear" sap:VirtualizedContainerService.HintSize="304,156.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="Assign Year3 to Empty" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Year3]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </uix:NCheckState.IfNotExists>
+                <uix:NCheckState.Target>
+                  <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" ContentHash="J4aOJlqKW0uL651itw3COw" DesignTimeRectangle="966, 571, 100, 22" ElementType="Text" FriendlyName="'Year3'" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='5' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="e00a2b70f7d0d773f277bb2e6f2a9c6d.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/Tgpuzgposk6VDfudAMeN2Q" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NCheckState.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NCheckState>
+              <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'Year4'" sap:VirtualizedContainerService.HintSize="734,472.666666666667" sap2010:WorkflowViewState.IdRef="NCheckState_3" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NCheckState.IfExists>
+                  <Sequence DisplayName="Fourth year appears" sap:VirtualizedContainerService.HintSize="376,252.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NGetText DisplayName="Get Text 'Year4'" sap:VirtualizedContainerService.HintSize="334,158" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                      <uix:NGetText.Target>
+                        <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" ContentHash="oosG_MsLSkSPKZfq_mFS0A" DesignTimeRectangle="1116, 571, 100, 22" ElementType="Text" FriendlyName="'Get Text 'Year4''" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='6' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="565c534acf27390461b563329c1fe008.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/Nopqec5TMUuJL-uKEGS8jg" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                      </uix:NGetText.Target>
+                      <uix:NGetText.Text>
+                        <OutArgument x:TypeArguments="x:String">[Year4]</OutArgument>
+                      </uix:NGetText.Text>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NGetText>
+                  </Sequence>
+                </uix:NCheckState.IfExists>
+                <uix:NCheckState.IfNotExists>
+                  <Sequence DisplayName="Fourth year does not appear" sap:VirtualizedContainerService.HintSize="304,156.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="Assign Year4 to Empty" sap:VirtualizedContainerService.HintSize="262,62" sap2010:WorkflowViewState.IdRef="Assign_3">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Year4]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" Value="" />
+                        </InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </uix:NCheckState.IfNotExists>
+                <uix:NCheckState.Target>
+                  <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/income-statement" ContentHash="oosG_MsLSkSPKZfq_mFS0A" DesignTimeRectangle="1116, 571, 100, 22" ElementType="Text" FriendlyName="'Year4'" FullSelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' idx='6' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='columntablejqxgrid' tag='SPAN' parentclass='jqx-grid-column-header jqx-widget-header' type='' /&gt;" Guid="7fb06a30-ba77-4f4b-9db4-bb46af7483ee" ImageBase64="" InformativeScreenshot="565c534acf27390461b563329c1fe008.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/Nopqec5TMUuJL-uKEGS8jg" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NCheckState.Target>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </uix:NCheckState>
+            </Sequence>
+            <ui:IfElseIf DisplayName="Check Num of Years" sap:VirtualizedContainerService.HintSize="776,22" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
+              <ui:IfElseIf.ConditionBlocks>
+                <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                  <ui:IfElseIfBlock BlockType="If" Condition="[Year2 = &quot;&quot;]">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Only one year of financial data available.&quot;]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:MessageBox>
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                  <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Year3 = &quot;&quot;]">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,75.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Only two years of financial data available&quot;]" />
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                  <ui:IfElseIfBlock BlockType="ElseIf" Condition="[Year4 = &quot;&quot;]">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,75.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;Only three years of financial data available.&quot;]" />
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                </sc:BindingList>
+              </ui:IfElseIf.ConditionBlocks>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:IfElseIf>
+            <Assign DisplayName="Assign Year List" sap:VirtualizedContainerService.HintSize="776,62" sap2010:WorkflowViewState.IdRef="Assign_7">
+              <Assign.To>
+                <OutArgument x:TypeArguments="scg:List(x:String)">[out_YearList]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="scg:List(x:String)">[new List(of String)({Year1, Year2, Year3, Year4})]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Sequence DisplayName="Get Relevant Rows" sap:VirtualizedContainerService.HintSize="776,22" sap2010:WorkflowViewState.IdRef="Sequence_13">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="sd:DataTable" Name="SGARow" />
+                <Variable x:TypeArguments="sd:DataTable" Name="EPSRow" />
+                <Variable x:TypeArguments="sd:DataTable" Name="COGSRow" />
+                <Variable x:TypeArguments="sd:DataTable" Name="RevenueRow" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[RevenueRow]" DisplayName="Extract Revenue Row" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='Revenue'&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='text'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,158.666666666667" sap2010:WorkflowViewState.IdRef="NExtractData_2" LimitExtractionTo="Rows" MaximumResults="0" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NExtractData.Target>
+                  <uix:TargetAnchorable ContentHash="8-9tk5zCxE64-_-3FZl1aQ" DesignTimeRectangle="58, 506, 2988, 36" FriendlyName="'Extract Table Data'" FullSelectorArgument="&lt;webctrl aria-role='row' tag='DIV' id='row0jqxgrid' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='row' tag='DIV' id='row0jqxgrid' type='' aaname='' check:text='Revenue$149,558$127,144$155,900$160,338$156,776$151,800' /&gt;" Guid="c51a3842-1a74-4a0c-898b-20aabe6a6487" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAB14AAAAoCAYAAABeklgxAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAB1ZSURBVHhe7Z39r2VVecdJ+Af8xR9M/MmfjDExxBBCAo3FokA1QWkglhAb2kBAq1ik2AClMFjBEhBa5b2VKQOmFiySKMzAAAMDKG/D2wwM8jbOK/PCMIyo8WV3vpvzXJ+7eNY+a5+z18ydw+eTfHPvWXvttdfe63vX2ud57j7ngFdffbURv/rVr7I6e8njzcHn3tn89InX5pV95pJ7m1c375hXV69VfvJVDzWv79jV7qN9v3fX6nn1vFRP9aP2pFybvj/SY2s3N5+48O53Hcv2V5/tWNq/S3Ys305OuXPc+sau5sL/fao55Ly75tr980V3N2cufqz5639/MDzfh9ds3HMOy5rDL1jWPPjchnnb1L61k5POX9dB9XX8q5euaY65+N55dU7cc+znXts6r22EEEKoVLp3iMpLZGuyrUl+Lbd1XOVH7Fkvn/zFlnlltsZFZV3tTiu7V4KFybZt25qTTz65uemmm5qjjz66OfDAA5vzzz+/+f3vfz+qMZ+VK1e2dZYsWTIqeQcrP+OMM5rf/OY3o9J32LFjR3Pcccc1X/ziF5tdu3Zl2xBvv/12c9ppp7V9Ud9y4KuFwfPPP9+cfvrpzfXXX98ccsgh7bjecMMNo63j+e1vf9uceeaZzUEHHdS2NQ7544ILLmiPc8kllzS/+93vRlve8dkJJ5zQnHXWWfM8uGjRorF+MvDVwqZrvpJ/5CPNNfKCR37Q3HTEEUc0GzZsGJXGaI7SXPWpT32qef3115mv3gN0+Ure0ZyiucX7Sn5I561pvNI1t+XAV3XR2Jaub5OMX0rOP7a2HXrooc3q1atHpU3zxz/+sbn77rubD37wg80VV1zRvmYdXPjU9JXNVx/60Iea+++/f1T6Ds8880w7ZzG+AACQ480336yuA/pgi1YUaDTVTrxue2NX83fXPNwcs2e/lzfVTbzu3vP6rJsea4785j3Ns6+8Pq/epIrOUcdZdOtTbfk/LH60WbNua7Nz1+5225tv7W7O+P6j77p+W7a/2fzN9x5qDv3nu1rpd5XZ9jsee7Vtb/H9a+fKSrVuyxvNDx96qU26HnLenc1J/7FyXtsIIYRQqXTvEJWXyNZkrWfpWl6aZI3KutqdVrzBX9goCKdgsH5u2rSp+exnP9uZnMgFBq1cwb2UNOD89NNPNx/+8IebxYsXj2r8CXnmlFNOmUvS5sBXCwMFEM8+++x2jBUQVlBPY7dly5Z2zOUJr9Q3GsfDDjusras2upAfvvrVrzbve9/7mm9/+9vzgsoKOCvwrMD02rVrR6XvQMB5duiar+RF+S/nJfkgTZRFyEsKdFtd5qvZp8tXt99+ezv+WuM8UeJ1Uq90zW1d4Ku6aGyj9W2o8UvJ3V89/vjjbXL18ssvH5X8CR1bfZJnt2/fzjq4H1DTV3ZPpX9o0z+2efSPJOeccw7jCwAAWaJE6dAapVTLsEXLgouRpkm8WnD0n25+ok1G+rqPrt3UfPpflzdX/OS59slQJRuXP/PLeXWklas3NIf9y9LmnFueaF9bojMNqtqxuhKvev1vP362TT7+5PF3B2V1rL/45j3Nxbc/865tOVl//HHXv76zOe6yFWEyedO2N9/1xKuuzXfvXN3265pla1rpd5XZdbPrEF1LtalkqpK1Ovbi+9a2yeX0etoTv9HYIYQQQiXSvUNUXiJbk6MEaZRQLS3randa8QZ/YaGAz7HHHjv33/U+4CzGJSdygcE1a9Y0H/vYx4oSrxYYiupqu+pFQSMPvto3rFixojnyyCPbp2yEDyD6cV6/fn37u0+6Rr5Re1F5ip48VGBSAUh5N33qw3yTHi/VuMAzvlpY9Jmv5BE9part8mJKOrfJQ7/+9a/b3z0WnD744IObF198kflqBin11VNPPRXOY6nMV5N4Zdzc1gW+GpbS9c18IqYZv5Rx/9iWWyflN/VLyVb99N6MlJ5DCr4alr3pK7Wt+Siag4Q8xPgCAECOKFE6tEYp1TJs0YoCjaZpEq/bd77VnHrdI80nL7qn+fkLm+bqKXF46R3PtsnWZU+tax55fmP78bp68tU/ian99XSo1VOZJTrToKoFYsclXq2ekpSbtu2cq6f+nn79z+Ydq0TWH39cS64qsaynXa1c5/39e9e2SdWjvrW8eeGX29ryn+25NtYnnb89/aoybVMdS5qqTElY3+Z/3ftC2+YFP1zVvrbrqSStPWkrbdi6s/nClQ+0SWElaK0cIYQQKpXuHaLyEpF4hWnReCgwbB8JrECPBZztSS9tz41bLgC4c+fO5vjjjw//a3/r1q3NMccc0x5HQabdu3e3H+sY1bUnhiwgngNf7RvsyZvLLrus9YsPIOrvXU90yQfyQwl6gkftqd0cmzdvbj868f3vf39z8803N3/4wx9GW/6EvPzII480991337t06qmntk8A3XHHHW2drqdG8NXCos98ZR9bHT2xb8FtzUOaj8zHF110UduORx/V6T8anflq9ij11UsvvdSsWrUqnFdUR2OvtfDBBx+cyCslc1sX+GpY+q5v045fSu7+yrxj/fJYv/TEq57WZh1ceOxNX2nt0xoYfe2HzW2MLwAA5IgSpUNrlFItwxYtLZg5TZN4VZkSrkq8fvKiu5srf/Jc88OHX2pOufaRNlF43g+ebBODShZetfSdpzz/6vIVbXJyyQMvNidc8UBbdv7/rJpLIFqiMw2qWiB2XOLVH0vlNyx/Ye5Yatf65NvokvUnPa5eq1zno/alv7364ebPLljWHP+dFXPBYkuypt/rqt9VZslYldm1PPyCpe1Twrf97OXmH296fM+53NUce+n9zYsbtrf11H+dh85R11rX3F9PPRFrx0EIIYT6SPcOUXmJuhKkq17a0n7qhMr1/eT6PvLnXt3afPpby9sy/dRrldv3l6u+9vvlljfadVBlWiNXPLd+3nGnEW/wFxYKxPjvf/IBZ33kmQJz6XeDeXKBQQV0rrvuuva/8xUosuCgfur1Bz7wgfYjGw3tr0DU8uXLRyXvPIF27rnntn14+eWXR6Ux+GrfkH7XnA8gyk/ylX3X3Dj0tOGXv/zlzo+2Nk+kvuqDPQ0kj48DXy0s+s5XS5cubb2Sfhde6k1LrpqPDW3T93ymcxzz1Wwx7Too5An/BLVR6pUh5jZ8NSx91rchxi8ld39lCf10vhKl6y7r4L5jb/pKn9ig76e2uc1jcxvjCwAAOaJE6dAapVTLsEUrCjSapk28Si9t3N6c+d+PtcFQC6jqKU2f4FRC9MePvtImKpVIlPT7//38leatPTdrVm/axKukYz3w3IbmpO+ubI+T61OJcolXtaOPDFaiVNt17uf+4Mn2WigRqgTobY+83H6csLbrO2HVL9tfv9v3xPqPHNb+aseupbX72uY35vaV9LTw1UvXzAWsdZ46X523Pw5CCCHUR7p3iMpL1JV4XajiDf7Cw4IvH/nIR9rvjfr85z/fXHnllc0hhxwSBvY8XR95p+CgEmn6L/0LL7ywWbZsWftTr1Wu7YbVVXBITz2q7pe+9KXiYBO+2ndYoFB+ufTSS5uTTjqpufjii1s/fe5zn2uf1iih6ylpQ0+b6Vgf/ehH2yc1lFBLdcstt3R+zCsB5/2bPvOVgtbyhOaRr3zlK+28ovkl8qb38Y033tjW1T7a92tf+xrz1YwzzTooconXUq8MMbfhq+EpXd/6jp/WId076R4qR9f9lflVX+mgJN0999wzd3+lpN64dZd1cN+yN32lttSm2tF2ecXWwcMPP5zxBQCALFGidGiNUqpl2KIVBRoRQgghhFLp3iEqL1GaeNV3quufrmro4TUbB/lHI97gL0z0/VEW9FHQRgEafUznunXrRjViugKDQv/Bf/XVV7cBQtXTT71WeYqSbQp4Wx/sO7BKPlYNX+1bXnnlldYv8o3GTmMoP23fvn1UYzwKACsQrCfNIn8I+Uztd6lrf0HAef+nz3yl5Ottt93Wzieq2+XN1Mfa59Zbbw2fdGS+mj0mXQdFLvEqSrwyxNyGr+pQsr71Hb9pE69C/fr6178+5yvdX1111VXz/kkkB+vgvmdv+srmto9//OPtdjuWyhlfAADIESVKh9YopVqGLVpRoBEhhBBCKJXuHaLyEqWJ15rScXS8qB99xBv8hY2CcArilATjFhL4amGgpIN9ZN4sgK8WNsxXUAN8BRFDrm96QvEb3/hG5/eZLxTwVV32ta8YXwAAyBElSofWKKVahi1aUaARIYQQQiiV7h2i8hKReIWhIeAM00DiFfYmzFdQA3wFEUOub88++2xz4oknNhs3bhyVLFzwVV32ta8YXwAAyBElSofWKKVahi1aUaARIYQQQiiV7h2i8hJt3LqzOf47K8JE6dDScXS8qB99xBt8qAG+ghrgK6gBvoIa4Kv9A32v7zXXXNP86Ec/Gvt90AsBfLV/MKmvGF8AAMgRJUqH1iilWoYtWlGgESGEEEIole4dovJZFW/woQb4CmqAr6AG+ApqgK+gBvhqtmF8AQAgR5QoHVqjlGoZtmhFgUaEEEIIoVS6d4jKZ1W8wYca4CuoAb6CGuArqAG+ghrgq9mG8QUAgBxRonRojVKqZdiiFQUaEUIIIYRS6d4hKp9V8QYfaoCvoAb4CmqAr6AG+ApqgK9mG8YXAAByRInSoTVKqZZhi1YUaEQIIYQQSqV7h6h8VsUbfKgBvoIa4CuoAb6CGuArqAG+mm0YXwAAyBElSofWKKVahi1aUaARIYQQQiiV7h2i8lkVb/ChBvgKaoCvoAb4CmqAr6AG+Gq2YXwBACBHlCgdWqOUahm2aEWBRoQQQgihVLp3iMpnVbzBhxrgK6gBvoIa4CuoAb6CGuCr2YbxBQCAHFGidGiNUqpl2KIVBRoRQgghhFLp3iEqn1XxBh9qgK+gBvgKaoCvoAb4CmqAr2YbxhcAAHJEidKhNUqplmGLln4ihBBCCCGEEEIIIYQQQgtNAAAAEVGidGiNUqpl2KIVPeGBEEIIIZRK9w5R+ayKN/hQA3wFNcBXUAN8BTXAV1ADfDXbML4AAJAjSpQOrVFKtQxbtKJAI0IIIYRQKt07ROWzKt7gQw3wFdQAX0EN8BXUAF9BDfDVbMP4AgBAjihROrRGKdUybNGKAo0IIYQQQql07xCVz6p4gw81wFdQA3wFNcBXUAN8BTXAV7MN4wsAADmiROnQGqVUy7BFKwo0IoQQQgil0r1DVD6r4g0+1ABfQQ3wFdQAX0EN8BXUAF/NNowvAADkiBKlQ2uUUi3DFq0o0IgQQgghlEr3DlH5rIo3+FADfAU1wFdQA3wFNcBXUAN8NdswvgAAkCNKlA6tUUq1DFu0okAjQgghhFAq3TtE5bMq3uBDDfAV1ABfQQ3wFdQAX0EN8NVsw/gCAECOKFE6tEYp1TJs0YoCjQghhBBCqXTvEJXPqniDDzXAV1ADfAU1wFdQA3wFNcBXsw3jCwAAOaJE6dAapVTLsEUrCjQihBBCCKXSvUNUXqLde7Rh687m1c07mnVb3mh27tod1ltI4g0+1ABfQQ3wFdQAX0EN8BXUAF/NNowvAADkiBKlQ2uUUi3DFq0o0IgQQgghlEr3DlF5iZRw/cwl9zYHn3tnq58+8VpYbyGJN/hQA3wFNcBXUAN8BTXAV1ADfDXbML4AAJAjSpQOrVFKtQxbtKJAI0IIIYRQKt07ROUlqpV43b7zrea7d61uzvvBk803b3u6eXnTjrDeJOIN/jAsWrSoFbwDvpodtm3b1hx99NHNypUrRyX7DnxVl+eff7456qij2p/vJfBVXfAV1ABfQQ32ta8YXwAAyBElSofWKKVahi1aUaBRemzt5uYTF97dBkfPXvJ4WAfN1/fuWj0XUC4JKuu6+vonX/VQ8/qOXe027av20n1qyY/3OKme6kftIIQQml3p3iEqL1GtxGvNJ2l5gz8dS5YsaQ488MA5HXTQQVMFa5S8VTunnXZa8/bbb49Ku7HEmO+HXqvcUNLMb4+U7iPS/aI6Efhq/0f+kw/9+Od8GXmw5B8R/H4l9fFVHfqMX1S3b1Jec6TmSts/N2+mx+qaX9O52Guct/BVHUp8NenaZKReipT6psQr0/ZL4Ks6lPgqwu9XUt9IPZabh6I1U16L6FM3BV/VYW/MV0bX+DO+AACQI0qUDq1RSrUMW7SiQKNE4rWflDBV4tQCv+OuW5qk9fUtIUviFSGE0EKS7h2i8hL1TZA+99rW5gtXPtD85Z599FOvo3okXhceUdDEq28iQviATi7BldIVBPLBwUmCRQo4ldSLwFf7N/JNLpmRjn+Xt8Z5xXusJBCOr4ana/zSeajLF6VJg1zSK01m9D1Wbr6SxnkLXw1Pqa8mWZs8XT4xpd4q8cq0/RL4anj6zFcpftzHzQlG6XwlH8gPUd30WH3qRuCr4dlb85UYN/6MLwAA5IgSpUNrlFItwxatKNAokXjtpyhxqUCwAsJRfUuupklMBYxtfxKvCCGEFpJ07xCVl6hvgtSvS13rDonXhYcPvigwp2CJSWWliVMjDR6X7K/tqqf6Pgjo2xrXjg8q+mSGPz/9LnJ1I/DV/o35WD7S+CtIePvtt88FC238cx4s8UrqeR1zHPhqWPz4aWw11vqIRY21jY39/QvzhQWWc+Ofw4+5+cLPNeaBtF/jjuUD2SU+SsFXw9LXVxElc0gXka/EtF7p0y98NSzT+MrPPVLJ2JfOV8J84eemqEz0qRuBr4Zlb89X0VjLS7Y/4wsAADmiROnQGqVUy7BFKwo0Sj7gSeJ1vOwJVl2zv//Pn3cGgP3TsWlydl8lXlN19REhhNB7U7p3iMpLROL1vYMFSRSsUdBGryULypUEzwwfsDFZu12ofQsK+QCgsP519cPv74/ng1C+3OqPCyoJfLX/4hMTGmt7LW+nvvd1I6+oPPWm8B4zRfVS8NWw+HHS+Oq1As6rVq2aGx8bl1zCys9f44LT5h+1o/aEtevbzPnH5lfJz0O+fsn8lIKvhqWPryL8/n5eKcV71XtNTOOVvv3CV8Pir38fX0263qiO6o6br3z73heR1/rUzYGvhmVSXxl+fz+mEbnx92sb4wsAADmiROnQGqVUy7BFKwo0SrnEq/+IXAU3/WsplyxM60m54KhPPprSdq2OBWPtCVKTtZ22FfWv78cEp/L76+fq17bOBYH1Wtutrr+uXqp/xo2Pvqtc8n1OzycKRqdj569NbnxSjUu8RmOU1vN1/DYfJO/aR4rOT/JteJWeH0IIof7SvUNUXqJ03tZ8H9Uz+bXM1oLtO99qlq5a1/z40VeaO598rdn6xq7e7fYRb/AnIw3I6XVXYCaHtZNqXPBmHNaugkEKCkXk6vig9STnJPDV/ks6/vZagcEUX9d71gciIw8psKxtCm521UvBV8Pix0ljotcak9ycEWFjKUUeMXIB5wgfhPZJiJzffP2uPuTAV8Myra9ya1MpXZ6cxit9+4WvhmVSX5kf+qw3feYr3y/fbjRf9ambA18Ny6S+Mqadr4SflxhfAADIYcnR+++/f3Dts8RrTj7oGSU1vdJEmU8SpvJJzDRBF+n476wIy/0xcwk8KU2a5hRdKzuPNHHo63qpD+MSr13X3l/z3DHSvnSpK/Ha1Y/0GH487Tx8me/3tOdnsuMghBAaVrp3iMpLNETiNSoj8brw8IFdBcsUKBsXyIuwgI3aeOGFF4oDb134AJ5+6nWKDzSl/fbbrr322rYv+r1Pv/DV/ovGNx1z+SiXpIiCjl2JD/On6vuP8iv5+8FXw+LnCunss8/uFXAumWsMX1djbb6J9vVBaHnJyB3P+82L+Wrf4MdJ6uMr1ekzJ6T4Y0fjP6lXJukXvhqWSXxl+/Rdb/yxJp2v/Fpq+/SpmwNfDYsfa2lvzlfCj73aYnwBACDHTCZeLeiZlufqW0IsCpyqXMHS0jZ83Vw/fH1/TJ9QtSSgTy76tm3/LvljWsC3q42upGZuP99/K8+14+tK1qc+yrXtA9zjxiitr5+L71s7V8/v3+f8/LHs3Hxd7weEEELDSfcOUXmJ/Hrg5++c/Lpg83pU1rfdPuIN/mSkgRrTuOBtigI1FnzzbfZtx+MDhLl2rI6CPGlwyQcGI40LCgp8tX+T84APFHu857zUTorVVVt9g5b4ang0Dn7MTNHYefx+JXOCH+tIfi7K+cKX2zF90DqSbzcHvhqeSX3VtTaV4I+bHmsar0zSL3w1PH19Nel64+tG8j7Qsa1cxzG832y+6lM3B74anr6+Mqadr7wfrA3GFwAAcsxk4jWXYFMCTImwqMzqq01flkuy5bb5BGUugefb932xNnxdfy6S2kzbiJTrtz9e2kZuH8mfl++T9Set78/Bgs25a9BHXX2MlOt3us2Uttnn/Kyu5MceIYRQXeneISovkeZ2zfE2f9ucLu3eow1bd7Z1Nm9/sy3z879+6nVU1tXutOIN/uQoMKYAmQVNvHxArRTfXi5hOg4LApmioJE/ThR89IEg34YPTI07P3y1/5P6wJQGGLuSGalPrE0LLKsdC26PC4QLfFWHXNC5KwGQzjXj5gQ/1r6+95l5wHvK+80f0/qWmzejdnPgqzr09ZUfy5L5IMX7JlpDJ/XKpP3CV3Uo9dU0642vK3XNV77Mz4Pej9aHPnVz4Ks67O35SqTHVDuMLwAA5JjJxKsPbvrApyX7cm1EGlc3Pa5kr32iL9dOlEj0beSUJgJTdfVbr1Wu7apn5X0Tr75+l6x+n+ueU2ni1Y972g9T1H/vnb7nlxu3cWOFEEJoOuneISovUbpe+HXAr1tHLLq7efIXW+aV2ToalXW1O614gz89Pvhi8smCKJjTJyhcigI2/hi5QJDvj4KAKT4w6PvRp3/4anbwfkh9Iel3leU8r9+Fr2u+U/3SQLjAV3WJ5qpx4xKNdYQfax/I9r7w5ZHvvHzdiFy7EfiqLqW+8vWitWkc3jNdXkwZ55VJ+4Wv6tLlq2nXG1933HyV8920dXPgq7p0+coz6bwQ4X3B+AIAQA4Sr2MSgOPqpsf1yTef6Mu1EyUSfRs5WWDX2kmlY0T7pRrXF9sWnVdpYtKO0ee651Tax0h+PKJ90mva9/wk74dUakttWl2EEELDSPcOUXmJuhKkft2yNaK0rKvdacUb/GFQUEbygRgLqkVBHAXYFGjzKNCmgFtuexfpMbr2Vz9VJxfc8wEgH2wiMPjexHy5bNmyufG3JKsUBbK9V8yL5lFfL7d/DnxVF42HvttOc4DNReP+1kvnBT/W5gnD5iTzleH3kfx3TqdtROTaTcFXddG1L/GVjdc4z+WwOWbceEd0eWXSfuGrumiccr6adr3xdcfNV/6eScc1ormxT90c+KouGtO9MV+lWHuMLwAA5CDxOiYBOK5uelyfyPOJvlw7USIx10ap0mBvl+yY2q80qWl96qofqc91zyl3TN+2b7/rWkbXyTyi7X3Pzyvtj2mS8UQIIdQt3TtE5SVK1wKtG7bNz+X6qdelZV3tTive4A+DAiaSD55ZUM0CgF5R0kCBGwvyRNtzpO137VtyDAWdouCkP7dxgSZ8NTuYZxSENG/0DTivX79+7vU4+XZS8FVdNKYKOPuxHfe3XjovdM09FnA2X+Xwbfi5KUdpu/iqLrr243zV5Y8S+qxPETmvTNMvfFWXnK+GWG+6xj31iqTfVebnpaiNPnVz4Ku65Hzl55Rp5oUc5ivGFwAAcrwnE69RmW/HJ9m6km/RtlyiL9fvqI1c3VL5PpTIrlfXuebOS/1TmQWarTzStOcl5fqYG/9cvyXre6pJzy8n34dJzxshhFBeuneIykukdUTric3Tfg3x65atA6VlXe1OK97g90cBFgvqWTBGARPJb+tKIEVMEsjxQbyS/Xz9XP+i8xN9+oev9l+8R+RpG3cFIG2bpN8tKGl1jdRDJF4XJn78dN01prmAc1rX6DMvWGDZ/COi+SbXpvZJ569cv6J2c+CrYenjKyMa2z54z/i5yDOJV6bpF74allJfDbXe1Jiv+tTNga+GZW/OV36/3D0T4wsAADkWVuL1gAP+H3kxGAeq1XFzAAAAAElFTkSuQmCC" InformativeScreenshot="fcab4ebdbf883dc4a7056a18fd37957f.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/Igw4KgJKika7MM-qZ2TFow" ScopeSelectorArgument="&lt;html app='chrome.exe' title='* Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NExtractData.Target>
+              </uix:NExtractData>
+              <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[COGSRow]" DisplayName="Extract COGS Row" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='Cost of Goods Sold'&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='text'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,158.666666666667" sap2010:WorkflowViewState.IdRef="NExtractData_3" LimitExtractionTo="Rows" MaximumResults="0" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NExtractData.Target>
+                  <uix:TargetAnchorable ContentHash="1HXCkB5ykEq1FwVg6HDeVg" DesignTimeRectangle="58, 171, 2988, 36" FriendlyName="'Cost of Goods Sold'" FullSelectorArgument="&lt;webctrl aria-role='row' id='row1jqxgrid' tag='DIV' /&gt;" Guid="97dc0250-901f-4c41-9e53-55449f8d248d" InformativeScreenshot="0e62cb888809d2de3d78d8405fb5508c.png" Reference="cphEgi7JDE-YlNVdYKz1Lw/0_PiwEvf00K-kZsFFEcOTQ" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement* | * | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NExtractData.Target>
+              </uix:NExtractData>
+              <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[SGARow]" DisplayName="Extract SGA Row" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='SG&amp;amp;A'&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='text'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,158.666666666667" sap2010:WorkflowViewState.IdRef="NExtractData_5" LimitExtractionTo="Rows" MaximumResults="0" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NExtractData.Target>
+                  <uix:TargetAnchorable DesignTimeRectangle="58, 508, 2988, 36" FriendlyName="'SG&amp;A Expenses$10,763$18…'" FullSelectorArgument="&lt;webctrl aria-role='row' id='row4jqxgrid' tag='DIV' /&gt;" Guid="a828dc49-0905-4e63-9e49-744db73afafc" InformativeScreenshot="9c35b860acf50ed0b23dd4a49aaca3a8.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*Income Statement*| *| MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NExtractData.Target>
+              </uix:NExtractData>
+              <uix:NExtractData AppendResults="False" ContinueOnError="True" DataTable="[EPSRow]" DisplayName="Extract EPS Row" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='EPS'&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='text'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="334,158.666666666667" sap2010:WorkflowViewState.IdRef="NExtractData_4" LimitExtractionTo="Rows" MaximumResults="0" ScopeIdentifier="d9bf7b44-2ff8-4b50-a0c8-31edb63eb0d2" Version="V1">
+                <uix:NExtractData.Target>
+                  <uix:TargetAnchorable DesignTimeRectangle="58, 952, 2988, 36" FriendlyName="'EPS -'" FullSelectorArgument="&lt;webctrl aria-role='row' id='row21jqxgrid' tag='DIV' /&gt;" Guid="ee6480a0-ca96-4999-9c15-63b622bf72e6" InformativeScreenshot="314084fde311998494ae6ff4ccdb2a68.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Ford Motor Income Statement 2005-2020 | F | MacroTrends' /&gt;" SearchSteps="Selector" />
+                </uix:NExtractData.Target>
+              </uix:NExtractData>
+              <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="scg:List(sd:DataTable)">[out_DataList]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="scg:List(sd:DataTable)">[new List(of System.Data.DataTable)({RevenueRow, COGSRow, SGARow, EPSRow})]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-11, -11, 1942, 1042" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADbAAAA2wAX1lWfoAAAF9SURBVDhPY/DL3O2TvosY5JuxO6b0IIN32i6SEOkagBahCQER2J1YxIGIYeH620E5e5CFoksO7Dj8pGv2JaxmMTx6/qW8+zScD1Q0YeGVD59/3bj3IaHiEFwcjhiOnnu568jTkLx9EH5c2cGzV17vOvLk5r0Pc1bf9M9Et4Shuv/M/Sefm6aehwTc5MVXbz/4mNV4bOrSa7cefMxpOg5U5JexG8iILTsI0hCSu3fL/kfHzr+MKj4AFDp39c2KrXeBno4tPXD+2tu1O+8HZu/JqD965db79pkXgYaCgjWv5fidh5+mLLkGNPXm/Y9ZDceAgkC5jlmX7j3+DHTCss13L954C3QtyAYg9s/avWzL3XuPPz14+hkoF5ANDbTIov0HTz2/fPMdUBxonC84oKERl1Z7BGg2UCKzHmQ8BAEtqeo78/rd90s33sWXg4wHIqgGoLfqJp1rnX4BLVgCc/YAza6fdA4eJ4ikATQPa+wCBYFScC5CA5GIxORdehAA/T2i9OAfB1UAAAAASUVORK5CYII=" InformativeScreenshot="239ae1fa3dd9a427b6f210698a1497a3.png" Selector="&lt;html app='chrome.exe' title='*Income Statement*|*| MacroTrends' /&gt;" Url="https://www.macrotrends.net/stocks/charts/*" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <ui:LogMessage DisplayName="Log End" sap:VirtualizedContainerService.HintSize="852,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;GetRelevantFinancialData END&quot; + out_DataList(0).Columns.Count.ToString]" />
+  </Sequence>
+</Activity>

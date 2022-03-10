@@ -1,0 +1,244 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GetNumberOfEmployees" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_numberList" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="io_BrowserElement" Type="InOutArgument(ui:UiElement)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>788,2705.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GetNumberOfEmployees_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="35">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GetNumberOfEmployees" sap:VirtualizedContainerService.HintSize="798,2640.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Start" sap:VirtualizedContainerService.HintSize="756,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;GetNumberOfEmployees Start&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Browser Chrome: Ford Motor Income Statement 2005-2020 | F | MacroTrends" sap:VirtualizedContainerService.HintSize="756,2279.33333333333" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[io_BrowserElement]" InteractionMode="DebuggerApi" OpenMode="Never" OutUiElement="[io_BrowserElement]" ScopeGuid="95b8336b-6617-4b26-b0f1-e508c72e541a" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="722,2141.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="totalText" />
+              <Variable x:TypeArguments="scg:List(x:String)" Name="sentenceList" />
+              <Variable x:TypeArguments="x:String" Name="OtherMetricsHref" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NGetAttribute Attribute="href" DisplayName="Get Attribute 'Other Metrics'" sap:VirtualizedContainerService.HintSize="680,210" sap2010:WorkflowViewState.IdRef="NGetAttribute_1" ScopeIdentifier="95b8336b-6617-4b26-b0f1-e508c72e541a" Version="V1">
+              <uix:NGetAttribute.Result>
+                <OutArgument x:TypeArguments="x:String">[OtherMetricsHref]</OutArgument>
+              </uix:NGetAttribute.Result>
+              <uix:NGetAttribute.Target>
+                <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/AAPL/apple/income-statement" DesignTimeRectangle="1114, 562, 162, 49" ElementType="Text" FriendlyName="'Other Metrics'" FullSelectorArgument="&lt;webctrl aaname='Other Metrics' parentid='myTabs' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Other Metrics' parentid='myTabs' tag='A' type='' check:text='Other Metrics' /&gt;" Guid="4ef4bc50-d31d-45f6-86ad-b02eab26f047" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAKYAAAA1CAYAAADLepCaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAO2SURBVHhe7ZcxcusgEIbfnd6xfIN3BM/4FO58gYwLl24yE7fuk8kRXOuBEWIXFglksNczf/EVsVaw7H6A8ud2uw0AaANiApVATKASiAlUAjGBSiAmUAnEBCqBmEAlEBOoBGIClUBMoBKICVQCMYFKICZQCcQEKoGYQCUQE6gEYgKVQEygkqeI+bn/GP7+izkNh2853vE7HHbn4ZP89nM8Te9vLzT2FVyHLVuPYX9N476/hk0U91Dul/OwOf7KzwR01aycvmKaItKGiOy+hp/4vamZbyamtBahBmtz9xscYj6CcFJkYSeNPSn9szcTU7gFpNtiVe5E8Box35VOYlK5LGnDqGSW0Kz3FHOzc7nxvHzMyTwPsRBzmT5istOSy8Wg15y9BrOnrBsjFjM+jeSGx5vEkHwLRpshzovFeriY2/34Dh3br8d8K2+zYi7nJ3+jj4LSmpn3aKx9Pr+ZhbmlfmX6smqDFdJFTFqM+d0dCVEhZg5eLOm6HWHCSQ1y5POPxDz63ENjfb6b45WNH3Isy69YTIa7pbJiZt+zkBtO+Eam9JKzs5hL/3nTovvYSFYSy8Ukz2jxyGkTxpZjg3SRmMmJKhGJefFjpOsIz/zfbozy/GZ+jwSLRZHFpPmEHrH6jhsj7Y+Frp33qBVdxJQXI7NWTH6SkUL5k4Y0jMeSOadTSW7UPLQ57h0/rpvPP+fPLHdBqvIzlIhJ40dEMXNjjTmH3/iGivPsSWcx0x0cE2LrxOTjCmKS4ufx4+fnzJOKOeVnc5jmd+MlNanKj8dnxRROeqlm+Tqm0FiGsAla8uJvTNrcZUnyBV0r5vJmyJOKGSQ5Dwef6yjLOjF9fjz+mWJaaO4JRZ899XQRkxVrptFsN047sL2Yy1dQIzHZbw4/95yYy/kZXijmRGYzVY1RSB8xWaMtZOePxLswLK6RmAsN4zwqpn8nXveMDFX5GRqKmd8UY/4F+dBxizZWJZ3ENLBTcwFWiEZiRpJM8WIjW4kZb7jwe5p7TX6GlmKyueXPBZe7vEZLcgOQZy3oJ6alRM5JpED6TeOKUiemYXZ+eoq3E5M1l+Qi5l6cnxx7F3SVmIaF3kyxTFYBYc4W9BVzhBYnkF7vAX6a+NhqMcWxlmIeFDMjSj73kvxGYkns+GvFvCPMLa6frjXQ4wr3PEVMAGqBmEAlEBOoBGIClUBMoBKICVQCMYFKICZQCcQEKoGYQCUQE6gEYgKVQEygEogJVAIxgUogJlAJxAQqgZhAJRATKOQ2/AekFmavwkk++wAAAABJRU5ErkJggg==" InformativeScreenshot="69abf8a602c0effb04042060273001aa.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Apple Income Statement 2009-2021 | AAPL | MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+              </uix:NGetAttribute.Target>
+            </uix:NGetAttribute>
+            <uix:NGoToUrl DisplayName="Go To URL" sap:VirtualizedContainerService.HintSize="680,83.3333333333333" sap2010:WorkflowViewState.IdRef="NGoToUrl_1" Url="[Split(OtherMetricsHref, &quot;dividend-yield&quot;)(0) + &quot;number-of-employees&quot;]" Version="V1" />
+            <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State 'Other Metrics'" sap:VirtualizedContainerService.HintSize="680,552.666666666667" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="95b8336b-6617-4b26-b0f1-e508c72e541a" Version="V1">
+              <uix:NCheckState.IfExists>
+                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="376,332.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NMouseScroll Direction="Down" DisplayName="Mouse Scroll" sap:VirtualizedContainerService.HintSize="334,239.333333333333" sap2010:WorkflowViewState.IdRef="NMouseScroll_1" InteractionMode="HardwareEvents" MovementUnits="10" Version="V1">
+                    <uix:NMouseScroll.SearchedElement>
+                      <uix:SearchedElement DisplayName="{x:Null}">
+                        <uix:SearchedElement.Target>
+                          <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/DUNE/dune-acquisition/number-of-employees" ContentHash="ny5mGrsOIkS2aEe0v_dtcA" DesignTimeRectangle="920, 852, 156, 52" ElementType="Text" FriendlyName="'Other Metrics'" FullSelectorArgument="&lt;webctrl aaname='Other Metrics' parentid='myTabs' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Other Metrics' parentid='myTabs' tag='A' type='' check:text='Other Metrics' /&gt;" Guid="7842ba98-d764-4af7-ac05-66f16d47079e" ImageBase64="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" InformativeScreenshot="d8a8fd304062a6c2fd837d890555387e.png" Reference="3Eudy47NIky5BCA2zpyP5A/otWDmUDJDUqSb6azfY584A" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Dune Acquisition Number of Employees 2021-2021 | DUNE | MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                        </uix:SearchedElement.Target>
+                        <uix:SearchedElement.Timeout>
+                          <InArgument x:TypeArguments="x:Double" />
+                        </uix:SearchedElement.Timeout>
+                      </uix:SearchedElement>
+                    </uix:NMouseScroll.SearchedElement>
+                  </uix:NMouseScroll>
+                </Sequence>
+              </uix:NCheckState.IfExists>
+              <uix:NCheckState.Target>
+                <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/DUNE/dune-acquisition/number-of-employees" ContentHash="ny5mGrsOIkS2aEe0v_dtcA" DesignTimeRectangle="920, 852, 156, 52" ElementType="Text" FriendlyName="'Other Metrics'" FullSelectorArgument="&lt;webctrl aaname='Other Metrics' parentid='myTabs' tag='A' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Other Metrics' parentid='myTabs' tag='A' type='' check:text='Other Metrics' /&gt;" Guid="7842ba98-d764-4af7-ac05-66f16d47079e" ImageBase64="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" InformativeScreenshot="d8a8fd304062a6c2fd837d890555387e.png" Reference="3Eudy47NIky5BCA2zpyP5A/otWDmUDJDUqSb6azfY584A" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Dune Acquisition Number of Employees 2021-2021 | DUNE | MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector" />
+              </uix:NCheckState.Target>
+            </uix:NCheckState>
+            <TryCatch DisplayName="Try to Get Employee Numbers" sap:VirtualizedContainerService.HintSize="680,1080.66666666667" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <Sequence DisplayName="Parse Employee Numbers" sap:VirtualizedContainerService.HintSize="476,842.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NGetText DisplayName="Get Text 'UL'" sap:VirtualizedContainerService.HintSize="434,158" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="95b8336b-6617-4b26-b0f1-e508c72e541a" Version="V1">
+                    <uix:NGetText.Target>
+                      <uix:TargetAnchorable BrowserURL="https://www.macrotrends.net/stocks/charts/F/ford-motor/number-of-employees" DesignTimeRectangle="103, 476, 1116, 151" ElementType="List" FriendlyName="'UL'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;span&amp;gt;ul' tag='UL' parentid='main_content' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' tag='UL' parentid='main_content' aaname=' &amp;#x9;&amp;#x9;&amp;#x9;&amp;#x9; &amp;#x9;&amp;#x9;&amp;#x9;&amp;#x9; &amp;#x9;&amp;#x9;&amp;#x9;&amp;#x9; &amp;#x9;&amp;#x9;&amp;#x9;&amp;#x9; &amp;#x9;&amp;#x9;&amp;#x9;&amp;#x9;' /&gt;" Guid="53bdc729-c821-4636-b0ed-1cd58cc862ca" ImageBase64="" InformativeScreenshot="ed3f1c4479edf843fd5302136dadf924.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Ford Motor: Number of Employees 2006-2021 | F | MacroTrends' /&gt;" SearchSteps="Selector, FuzzySelector" />
+                    </uix:NGetText.Target>
+                    <uix:NGetText.Text>
+                      <OutArgument x:TypeArguments="x:String">[totalText]</OutArgument>
+                    </uix:NGetText.Text>
+                  </uix:NGetText>
+                  <Assign DisplayName="Assign Sentence List" sap:VirtualizedContainerService.HintSize="434,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="scg:List(x:String)">[sentenceList]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="scg:List(x:String)">[Split(totalText,"was").ToList]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Remove First Item" sap:VirtualizedContainerService.HintSize="434,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="scg:List(x:String)">[sentenceList]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="scg:List(x:String)">[sentenceList.GetRange(1,sentenceList.Count - 1)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="Assign Number List" sap:VirtualizedContainerService.HintSize="434,62" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="scg:List(x:String)">[out_numberList]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="scg:List(x:String)">[new List(of String)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each Sentence" sap:VirtualizedContainerService.HintSize="434,244" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[sentenceList]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:String">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="242,116.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <AddToCollection x:TypeArguments="x:String" Collection="[out_numberList]" DisplayName="Add To Number List" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[Split(item, &quot;, &quot;)(0).Trim]" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                </Sequence>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="480.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,291.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;No employee info found.&quot;]" />
+                      <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="scg:List(x:String)">[out_numberList]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="scg:List(x:String)">[new List(of String)({"N/A", "N/A", "N/A", "N/A"})]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-11, -11, 1942, 1042" BrowserType="Chrome" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADbAAAA2wAX1lWfoAAAF9SURBVDhPY/DL3O2TvosY5JuxO6b0IIN32i6SEOkagBahCQER2J1YxIGIYeH620E5e5CFoksO7Dj8pGv2JaxmMTx6/qW8+zScD1Q0YeGVD59/3bj3IaHiEFwcjhiOnnu568jTkLx9EH5c2cGzV17vOvLk5r0Pc1bf9M9Et4Shuv/M/Sefm6aehwTc5MVXbz/4mNV4bOrSa7cefMxpOg5U5JexG8iILTsI0hCSu3fL/kfHzr+MKj4AFDp39c2KrXeBno4tPXD+2tu1O+8HZu/JqD965db79pkXgYaCgjWv5fidh5+mLLkGNPXm/Y9ZDceAgkC5jlmX7j3+DHTCss13L954C3QtyAYg9s/avWzL3XuPPz14+hkoF5ANDbTIov0HTz2/fPMdUBxonC84oKERl1Z7BGg2UCKzHmQ8BAEtqeo78/rd90s33sWXg4wHIqgGoLfqJp1rnX4BLVgCc/YAza6fdA4eJ4ikATQPa+wCBYFScC5CA5GIxORdehAA/T2i9OAfB1UAAAAASUVORK5CYII=" InformativeScreenshot="57366a3e193137cb946ba383c2a6c773.png" Selector="&lt;html app='chrome.exe' title='*Income Statement*|*| MacroTrends' /&gt;" Url="https://www.macrotrends.net/stocks/charts/*" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <ui:LogMessage DisplayName="Log End" sap:VirtualizedContainerService.HintSize="756,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;GetNumberOfEmployees End&quot;]" />
+  </Sequence>
+</Activity>

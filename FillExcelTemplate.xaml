@@ -1,0 +1,318 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="FillExcelTemplate" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_CompanyName" Type="InArgument(x:String)" />
+    <x:Property Name="in_Ticker" Type="InArgument(x:String)" />
+    <x:Property Name="in_FinancialData" Type="InArgument(scg:List(sd:DataTable))" />
+    <x:Property Name="in_YearList" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="in_EmployeeList" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="out_FileName" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>974,2599.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>FillExcelTemplate_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="64">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="58">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="FillExcelTemplate" sap:VirtualizedContainerService.HintSize="984,2534.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="filename" />
+      <Variable x:TypeArguments="x:String" Name="destinationFolder" />
+      <Variable x:TypeArguments="x:Boolean" Name="fileExists" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Start" sap:VirtualizedContainerService.HintSize="942,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;FillExcelTemplate Start&quot;]" />
+    <Parallel sap:VirtualizedContainerService.HintSize="942,131.333333333333" sap2010:WorkflowViewState.IdRef="Parallel_2">
+      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Please select a folder for the Excel file (may need to minimize some windows to find the folder browser)&quot;]" />
+      <ui:SelectFolder DisplayName="Browse for folder" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[destinationFolder]" />
+    </Parallel>
+    <Assign DisplayName="Assign Filename" sap:VirtualizedContainerService.HintSize="942,62" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[filename]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_Ticker + " - 4-Year Financial Basics - " + DateTime.Now.ToString("yyyy-MM-dd") + ".xls"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:FileExistsX DisplayName="File Exists" Exists="[fileExists]" sap:VirtualizedContainerService.HintSize="942,135.333333333333" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[destinationFolder + &quot;\&quot; + filename]" />
+    <If Condition="[fileExists]" DisplayName="If File Exists" sap:VirtualizedContainerService.HintSize="942,502" sap2010:WorkflowViewState.IdRef="If_5">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Delete Old File" sap:VirtualizedContainerService.HintSize="426,307.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Already Exists" sap:VirtualizedContainerService.HintSize="384,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;File already exists.&quot;]" />
+          <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="384,80.6666666666667" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[destinationFolder + &quot;\&quot; + filename]" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <Assign DisplayName="Assign Filename Argument" sap:VirtualizedContainerService.HintSize="942,62" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_FileName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[destinationFolder + "\" + filename]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[destinationFolder + &quot;\&quot; + filename]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="942,162" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="False" Path="Data\4-Year Financials TMPLT.xlsx" />
+    <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" ShowExcelWindow="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="942,878.666666666667" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_1">
+      <ueab:ExcelProcessScopeX.Body>
+        <ActivityAction x:TypeArguments="ui:IExcelProcess">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Create and Write to Excel File" sap:VirtualizedContainerService.HintSize="476,792.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ueab:ExcelApplicationCard Password="{x:Null}" ReadFormatting="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="434,700.666666666667" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_1" WorkbookPath="[destinationFolder + &quot;\&quot; + filename]">
+              <ueab:ExcelApplicationCard.Body>
+                <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,424" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <TryCatch.Try>
+                        <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C2&quot;)]" DisplayName="Write Company Name" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_2" Value="[in_CompanyName]" />
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,310" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Display Error and Rethrow" sap:VirtualizedContainerService.HintSize="376,239.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Error Message Box" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;File cannot be edited. If a file with the same name ('Ticker - 4-Year Financial Basics - yyyy-MM-dd') is currently open, please close it and re-run this process.&quot;]" />
+                              <Rethrow sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                            </Sequence>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                    </TryCatch>
+                    <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C3&quot;)]" DisplayName="Write Date" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="WriteCellX_3" Value="[DateTime.Now.ToString(&quot;MM-dd-yyyy&quot;)]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ueab:WriteCellX>
+                    <If Condition="[in_FinancialData(0).Rows.Count &gt; 2]" DisplayName="If At Least One Year" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="If_1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="Write First Column" sap:VirtualizedContainerService.HintSize="476,1264" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;F7&quot;)]" DisplayName="Write First Year" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_4" Value="[in_YearList(0)]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;F8&quot;)]" DisplayName="Write First Revenue" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_5" Value="[in_FinancialData(0)(2)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;F9&quot;)]" DisplayName="Write First COGS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_6" Value="[in_FinancialData(1)(2)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;F11&quot;)]" DisplayName="Write First SG&amp;A" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_7" Value="[in_FinancialData(2)(2)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;F21&quot;)]" DisplayName="Write First EPS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_8" Value="[in_FinancialData(3)(2)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;F18&quot;)]" DisplayName="Write First Headcount" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_24" Value="[in_EmployeeList(0)]" />
+                        </Sequence>
+                      </If.Then>
+                    </If>
+                    <If Condition="[in_FinancialData(0).Rows.Count &gt; 3]" DisplayName="If At Least Two Years" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="If_2">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="Second Column" sap:VirtualizedContainerService.HintSize="476,1264" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;E7&quot;)]" DisplayName="Write Second Year" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_9" Value="[in_YearList(1)]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;E8&quot;)]" DisplayName="Write Second Revenue" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_10" Value="[in_FinancialData(0)(3)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;E9&quot;)]" DisplayName="Write Second COGS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_11" Value="[in_FinancialData(1)(3)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;E11&quot;)]" DisplayName="Write Second SG&amp;A" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_12" Value="[in_FinancialData(2)(3)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;E21&quot;)]" DisplayName="Write Second EPS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_13" Value="[in_FinancialData(3)(3)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;E18&quot;)]" DisplayName="Write Second Headcount" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_25" Value="[in_EmployeeList(1)]" />
+                        </Sequence>
+                      </If.Then>
+                    </If>
+                    <If Condition="[in_FinancialData(0).Rows.Count &gt; 4]" DisplayName="If At Least Three Years" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="If_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="Write Third Column" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;D7&quot;)]" DisplayName="Write Third Year" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_14" Value="[in_YearList(2)]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;D8&quot;)]" DisplayName="Write Third Revenue" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_15" Value="[in_FinancialData(0)(4)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;D9&quot;)]" DisplayName="Write Third COGS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_16" Value="[in_FinancialData(1)(4)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;D11&quot;)]" DisplayName="Write Third SG&amp;A" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_17" Value="[in_FinancialData(2)(4)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;D21&quot;)]" DisplayName="Write Third EPS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_18" Value="[in_FinancialData(3)(4)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;D18&quot;)]" DisplayName="Write Third Headcount" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_26" Value="[in_EmployeeList(2)]" />
+                        </Sequence>
+                      </If.Then>
+                    </If>
+                    <If Condition="[in_FinancialData(0).Rows.Count &gt; 5]" DisplayName="If At Least Four Years" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="If_4">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="Write Fourth Column" sap:VirtualizedContainerService.HintSize="476,1264" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C7&quot;)]" DisplayName="Write Fourth Year" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_19" Value="[in_YearList(3)]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C8&quot;)]" DisplayName="Write Fourth Revenue" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_20" Value="[in_FinancialData(0)(5)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C9&quot;)]" DisplayName="Write Fourth COGS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_21" Value="[in_FinancialData(1)(5)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C11&quot;)]" DisplayName="Write Fourth SG&amp;A" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_22" Value="[in_FinancialData(2)(5)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C21&quot;)]" DisplayName="Write Fourth EPS" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_23" Value="[in_FinancialData(3)(5)(0).ToString]" />
+                          <ueab:WriteCellX Cell="[Excel.Sheet(&quot;4-Year Trends&quot;).Cell(&quot;C18&quot;)]" DisplayName="Write Fourth Headcount" sap:VirtualizedContainerService.HintSize="434,162" sap2010:WorkflowViewState.IdRef="WriteCellX_27" Value="[in_EmployeeList(3)]" />
+                        </Sequence>
+                      </If.Then>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ueab:ExcelApplicationCard.Body>
+            </ueab:ExcelApplicationCard>
+          </Sequence>
+        </ActivityAction>
+      </ueab:ExcelProcessScopeX.Body>
+    </ueab:ExcelProcessScopeX>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="942,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;FillExcelTemplate End&quot;]" />
+  </Sequence>
+</Activity>
